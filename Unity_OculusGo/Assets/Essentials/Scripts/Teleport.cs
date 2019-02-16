@@ -30,7 +30,7 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
 
     void Start()
     {
-        TeleportRenderer = Player.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
+        TeleportRenderer = Player.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Renderer>();
     }
 
     void Update()
@@ -46,19 +46,15 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
     {
         //Setup Renderer
         TeleportRenderer.enabled = true;
-        TeleportRenderer.material.color = fadeColor;
-        
+        TeleportRenderer.material.color = fadeColor;      
 
         //Start Fading
         stopAllTheFade();
         doTheFade = true;
-
-
         
         //Delete all Amazon Echo Chat
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Echo"))
         {
-           
             try
             {
                 g.GetComponent<EchoInteraction>().deleteChat();
@@ -75,36 +71,23 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
             fadeDirection = false;
             elapsedTime = fadeInTime;
 
-            //Actually Teleporting
-            //Vector3 dif = Teleportlocation.position - Player.position;
-            //Player.position = Teleportlocation.position;
-            //Player.rotation = Teleportlocation.rotation;
-
-            bool hasDoneIt = false;
-            foreach (Camera c in Camera.allCameras)
+            //bool hasDoneIt = false;
+            /*foreach (Camera c in Camera.allCameras)
             {
                 if ((c.name != "LeftEyeAnchor") && (c.name != "RightEyeAnchor") && (!hasDoneIt))
                 {
-                    /*
-                    GameObject sObj = new GameObject();
-                    GameObject nObj = Instantiate(sObj);
-                    c.transform.position = nObj.transform.position;
-                    c.transform.parent = nObj.transform;
-                    c.transform.localPosition = Vector3.zero;
-                    nObj.transform.position = nObj.transform.position + (dif * 0.9f);
-                    nObj.transform.rotation = Player.rotation;*/
                     c.transform.parent.position = Teleportlocation.position;
                     c.transform.parent.rotation = Teleportlocation.rotation;
 
                     hasDoneIt = true;
                 }
-            }
+            }*/
 
+            GameObject c = GameObject.FindGameObjectWithTag("Player").transform.parent.gameObject;
+            c.transform.position = Teleportlocation.position;
+            c.transform.rotation = Teleportlocation.rotation;
 
-                //GameObject everything = GameObject.FindGameObjectWithTag("Finish");
-                //everything.transform.position = everything.transform.position - Teleportlocation.localPosition;
-
-                removeTeles();
+            removeTeles();
             }
 
             if ((elapsedTime < 0) && (!fadeDirection))
@@ -148,15 +131,20 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
         //Setup other teleporters
         foreach (GameObject Teleporter in GameObject.FindGameObjectsWithTag("Teleport"))
         {
-            if (Teleporter != this.gameObject)
+            if (Teleporter.gameObject != this.gameObject)
             {
+                foreach (Renderer ren in GetComponentsInChildren<Renderer>())
+                {
+                    ren.enabled = true;
+                }
+
                 Teleporter.SetActive(false);
             }
             else
-            {
-                foreach (Renderer r in Teleporter.GetComponentsInChildren<Renderer>())
+            { 
+                foreach (Renderer ren in GetComponentsInChildren<Renderer>())
                 {
-                    r.enabled = false;
+                    ren.enabled = false;
                 }
             }
         }
@@ -165,7 +153,14 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
         {
             foreach (GameObject Tele in Visible)
             {
-                if (Tele) Tele.SetActive(true);
+                if (Tele)
+                {
+                    Tele.SetActive(true);
+                    foreach (Renderer ren in GetComponentsInChildren<Renderer>())
+                    {
+                        ren.enabled = true;
+                    }
+                }
             }
         }
     }
