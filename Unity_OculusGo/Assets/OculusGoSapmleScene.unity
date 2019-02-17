@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 177347336}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4694,6 +4694,10 @@ Prefab:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1846879109}
+    - target: {fileID: 1140747153403572, guid: cc987f50c07c6d44483806085de02e0c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc987f50c07c6d44483806085de02e0c, type: 2}
   m_IsPrefabAsset: 0
