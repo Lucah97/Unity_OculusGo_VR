@@ -30,7 +30,7 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
 
     void Start()
     {
-        TeleportRenderer = Player.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Renderer>();
+        TeleportRenderer = Player.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
     }
 
     void Update()
@@ -87,6 +87,12 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
             c.transform.position = Teleportlocation.position;
             c.transform.rotation = Teleportlocation.rotation;
 
+            GameObject plat = GameObject.FindGameObjectWithTag("PlayerPlatform");
+            plat.transform.position = c.transform.position;
+            plat.transform.rotation = Quaternion.Euler(new Vector3(plat.transform.rotation.eulerAngles.x,
+                                                                   c.transform.rotation.eulerAngles.y,
+                                                                   plat.transform.rotation.eulerAngles.z));
+
             removeTeles();
             }
 
@@ -133,12 +139,15 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
         {
             if (Teleporter.gameObject != this.gameObject)
             {
-                foreach (Renderer ren in GetComponentsInChildren<Renderer>())
+                if (Teleporter.transform.parent.name != "SelectionContainer")
                 {
-                    ren.enabled = true;
-                }
+                    foreach (Renderer ren in GetComponentsInChildren<Renderer>())
+                    {
+                        ren.enabled = true;
+                    }
 
-                Teleporter.SetActive(false);
+                    Teleporter.SetActive(false);
+                }
             }
             else
             { 

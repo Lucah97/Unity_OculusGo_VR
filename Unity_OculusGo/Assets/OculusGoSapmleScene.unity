@@ -178,7 +178,7 @@ MonoBehaviour:
   - {fileID: 9703138}
   passVariables: a6010000
   addedEcho: {fileID: 0}
-  addAnimations: 0
+  addAnimations: 1
   swapActiveButtons: 0
   animationSpeed: 1
   scaleMult: 1.3
@@ -456,7 +456,7 @@ MonoBehaviour:
   - {fileID: 75988492}
   passVariables: a6010000
   addedEcho: {fileID: 0}
-  addAnimations: 0
+  addAnimations: 1
   swapActiveButtons: 0
   animationSpeed: 1
   scaleMult: 1.3
@@ -731,9 +731,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1846879109}
-  - {fileID: 927118876}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 91.9, z: 0}
 --- !u!1001 &226302836
 Prefab:
@@ -1069,7 +1068,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 3a2a8fb8b561a4145aa44a3888bdd2ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1110,7 +1109,7 @@ GameObject:
   - component: {fileID: 368305348}
   - component: {fileID: 368305347}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: SelectionContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1161,7 +1160,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5651edcfd8f45b347895af5d6dc02fdf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1215,7 +1214,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 368478326}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.07}
+  m_LocalPosition: {x: 0, y: -0, z: 0.07}
   m_LocalScale: {x: 0.21683934, y: 0.21683934, z: 0.21683934}
   m_Children: []
   m_Father: {fileID: 869785513}
@@ -2201,7 +2200,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 869785507}
   m_LocalRotation: {x: 0.7033624, y: 0.07267402, z: -0.07267402, w: 0.7033622}
-  m_LocalPosition: {x: -0.08707691, y: 0.61760193, z: -0.33992973}
+  m_LocalPosition: {x: -0.15, y: 0.697, z: -0.49}
   m_LocalScale: {x: 0.39163885, y: 0.2083612, z: 0}
   m_Children:
   - {fileID: 368478327}
@@ -2216,15 +2215,15 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1545753761}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.23, z: 0}
-  m_LocalScale: {x: 5, y: 0.2, z: 5}
+  m_LocalRotation: {x: -0, y: -0.63964516, z: -0, w: 0.76867044}
+  m_LocalPosition: {x: -0.11000061, y: -2.19, z: 0.829998}
+  m_LocalScale: {x: 5, y: 0.19999999, z: 5}
   m_Children:
   - {fileID: 368305346}
   - {fileID: 1939428724}
-  m_Father: {fileID: 177347336}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 1299341504}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -79.531006, z: 0}
 --- !u!1001 &940983843
 Prefab:
   m_ObjectHideFlags: 0
@@ -2303,6 +2302,14 @@ Prefab:
     - target: {fileID: 400002, guid: df93ecf3dd9e2ec4d8d382a0105dad58, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: df93ecf3dd9e2ec4d8d382a0105dad58, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: df93ecf3dd9e2ec4d8d382a0105dad58, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df93ecf3dd9e2ec4d8d382a0105dad58, type: 3}
@@ -3239,7 +3246,7 @@ MonoBehaviour:
   - {fileID: 1233212779}
   passVariables: a6010000
   addedEcho: {fileID: 0}
-  addAnimations: 0
+  addAnimations: 1
   swapActiveButtons: 0
   animationSpeed: 1
   scaleMult: 1.3
@@ -3570,7 +3577,7 @@ MonoBehaviour:
   - {fileID: 1295915864}
   passVariables: a6010000
   addedEcho: {fileID: 0}
-  addAnimations: 0
+  addAnimations: 1
   swapActiveButtons: 0
   animationSpeed: 1
   scaleMult: 1.3
@@ -3616,6 +3623,35 @@ Transform:
   - {fileID: 693169770}
   m_Father: {fileID: 2082617063}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1299341503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299341504}
+  m_Layer: 0
+  m_Name: PlayerPlatform
+  m_TagString: PlayerPlatform
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299341504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1299341503}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -60.8, y: 2.41, z: -41.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 927118876}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1326847560
 GameObject:
@@ -4456,11 +4492,11 @@ GameObject:
   - component: {fileID: 1545753763}
   - component: {fileID: 1545753762}
   m_Layer: 0
-  m_Name: Player_Platform
+  m_Name: plat_mdl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!23 &1545753762
 MeshRenderer:
@@ -4478,7 +4514,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 65aecccf2cd78824ea4d797c95a4e234, type: 2}
+  - {fileID: 2100000, guid: 4eaf1559a279abe47811782c3583657c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5031,6 +5067,14 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 30556fea82b2394449644a100a399905, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 30556fea82b2394449644a100a399905, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30556fea82b2394449644a100a399905, type: 3}
   m_IsPrefabAsset: 0
@@ -5411,7 +5455,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871209774}
   m_LocalRotation: {x: 0.7033624, y: 0.07267402, z: -0.07267402, w: 0.7033622}
-  m_LocalPosition: {x: -0.1433155, y: 0.61760193, z: 0.3471987}
+  m_LocalPosition: {x: -0.09, y: 0.697, z: 0.49}
   m_LocalScale: {x: 0.39163885, y: 0.2083612, z: 0}
   m_Children:
   - {fileID: 1981495686}
@@ -5511,7 +5555,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1939428724
 Transform:
@@ -5545,7 +5589,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 65aecccf2cd78824ea4d797c95a4e234, type: 2}
+  - {fileID: 2100000, guid: 5651edcfd8f45b347895af5d6dc02fdf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5636,7 +5680,7 @@ MonoBehaviour:
   - {fileID: 1960328075}
   passVariables: a6010000
   addedEcho: {fileID: 0}
-  addAnimations: 0
+  addAnimations: 1
   swapActiveButtons: 0
   animationSpeed: 1
   scaleMult: 1.3
@@ -5853,7 +5897,7 @@ MonoBehaviour:
   - {fileID: 1984502407}
   passVariables: a6010000
   addedEcho: {fileID: 0}
-  addAnimations: 0
+  addAnimations: 1
   swapActiveButtons: 0
   animationSpeed: 1
   scaleMult: 1.3
@@ -5934,7 +5978,7 @@ Transform:
   - {fileID: 1295915864}
   - {fileID: 75988492}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2113261516
 GameObject:

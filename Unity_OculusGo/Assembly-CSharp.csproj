@@ -316,6 +316,7 @@
     <Compile Include="Assets\Essentials\Scripts\PlayVideo.cs" />
     <Compile Include="Assets\Essentials\Scripts\ReplayVideo.cs" />
     <Compile Include="Assets\Essentials\Scripts\StartPos.cs" />
+    <Compile Include="Assets\Essentials\Scripts\SwitchObject.cs" />
     <Compile Include="Assets\Essentials\Scripts\Teleport.cs" />
     <Compile Include="Assets\Essentials\Scripts\TeleTest.cs" />
     <Compile Include="Assets\Essentials\Scripts\UI\IRayCastInteraction.cs" />
