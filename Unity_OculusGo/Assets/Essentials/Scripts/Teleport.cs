@@ -46,19 +46,15 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
     {
         //Setup Renderer
         TeleportRenderer.enabled = true;
-        TeleportRenderer.material.color = fadeColor;
-        
+        TeleportRenderer.material.color = fadeColor;      
 
         //Start Fading
         stopAllTheFade();
         doTheFade = true;
-
-
         
         //Delete all Amazon Echo Chat
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Echo"))
         {
-           
             try
             {
                 g.GetComponent<EchoInteraction>().deleteChat();
@@ -75,27 +71,13 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
             fadeDirection = false;
             elapsedTime = fadeInTime;
 
-            //Actually Teleporting
-            //Vector3 dif = Teleportlocation.position - Player.position;
-            //Player.position = Teleportlocation.position;
-            //Player.rotation = Teleportlocation.rotation;
-
-            bool hasDoneIt = false;
-            foreach (Camera c in Camera.allCameras)
+            //bool hasDoneIt = false;
+            /*foreach (Camera c in Camera.allCameras)
             {
                 if ((c.name == "LeftEyeAnchor") && (!hasDoneIt))
                 {
-                    /*
-                    GameObject sObj = new GameObject();
-                    GameObject nObj = Instantiate(sObj);
-                    c.transform.position = nObj.transform.position;
-                    c.transform.parent = nObj.transform;
-                    c.transform.localPosition = Vector3.zero;
-                    nObj.transform.position = nObj.transform.position + (dif * 0.9f);
-                    nObj.transform.rotation = Player.rotation;*/
-                    Transform PlayPlat = GameObject.FindGameObjectWithTag("PlayerPlat").transform;
-                    Transform PlatFace = GameObject.FindGameObjectWithTag("PlatformFacing").transform;
-                    c.transform.parent.parent.parent.position = Teleportlocation.position;
+                    c.transform.parent.position = Teleportlocation.position;
+                    c.transform.parent.rotation = Teleportlocation.rotation;
 
                     PlayPlat.LookAt(PlatFace.position, Vector3.up);
                     Vector3 assignedEulers = PlayPlat.rotation.eulerAngles;
@@ -105,13 +87,19 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
 
                     hasDoneIt = true;
                 }
-            }
+            }*/
 
+            GameObject c = GameObject.FindGameObjectWithTag("Player").transform.parent.gameObject;
+            c.transform.position = Teleportlocation.position;
+            c.transform.rotation = Teleportlocation.rotation;
 
-                //GameObject everything = GameObject.FindGameObjectWithTag("Finish");
-                //everything.transform.position = everything.transform.position - Teleportlocation.localPosition;
+            GameObject plat = GameObject.FindGameObjectWithTag("PlayerPlatform");
+            plat.transform.position = c.transform.position;
+            plat.transform.rotation = Quaternion.Euler(new Vector3(plat.transform.rotation.eulerAngles.x,
+                                                                   c.transform.rotation.eulerAngles.y,
+                                                                   plat.transform.rotation.eulerAngles.z));
 
-                removeTeles();
+            removeTeles();
             }
 
             if ((elapsedTime < 0) && (!fadeDirection))
@@ -154,12 +142,24 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
     {
         //Setup other teleporters
         foreach (GameObject Teleporter in GameObject.FindGameObjectsWithTag("Teleport"))
-        { 
-            if ((Teleporter.transform.parent) && (Teleporter.transform.parent.name != "ExtraContainer"))
+        {
+            if (Teleporter.gameObject != this.gameObject)
             {
-                if (Teleporter != this.gameObject)
+                if (Teleporter.transform.parent.name != "SelectionContainer")
                 {
+                    foreach (Renderer ren in GetComponentsInChildren<Renderer>())
+                    {
+                        ren.enabled = true;
+                    }
+
                     Teleporter.SetActive(false);
+                }
+            }
+            else
+            { 
+                foreach (Renderer ren in GetComponentsInChildren<Renderer>())
+                {
+                    ren.enabled = false;
                 }
                 else
                 {
@@ -175,7 +175,14 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
         {
             foreach (GameObject Tele in Visible)
             {
-                if (Tele) Tele.SetActive(true);
+                if (Tele)
+                {
+                    Tele.SetActive(true);
+                    foreach (Renderer ren in GetComponentsInChildren<Renderer>())
+                    {
+                        ren.enabled = true;
+                    }
+                }
             }
         }
     }

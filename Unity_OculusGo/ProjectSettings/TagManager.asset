@@ -10,11 +10,7 @@ TagManager:
   - PlSet2
   - PlSet3
   - Teleport
-  - OM
-  - Object
-  - PlatObject
-  - PlayerPlat
-  - PlatformFacing
+  - PlayerPlatform
   layers:
   - Default
   - TransparentFX
