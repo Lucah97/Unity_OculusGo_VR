@@ -83,7 +83,7 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
             bool hasDoneIt = false;
             foreach (Camera c in Camera.allCameras)
             {
-                if ((c.name != "LeftEyeAnchor") && (c.name != "RightEyeAnchor") && (!hasDoneIt))
+                if ((c.name == "LeftEyeAnchor") && (!hasDoneIt))
                 {
                     /*
                     GameObject sObj = new GameObject();
@@ -93,8 +93,15 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
                     c.transform.localPosition = Vector3.zero;
                     nObj.transform.position = nObj.transform.position + (dif * 0.9f);
                     nObj.transform.rotation = Player.rotation;*/
-                    c.transform.parent.position = Teleportlocation.position;
-                    c.transform.parent.rotation = Teleportlocation.rotation;
+                    Transform PlayPlat = GameObject.FindGameObjectWithTag("PlayerPlat").transform;
+                    Transform PlatFace = GameObject.FindGameObjectWithTag("PlatformFacing").transform;
+                    c.transform.parent.parent.parent.position = Teleportlocation.position;
+
+                    PlayPlat.LookAt(PlatFace.position, Vector3.up);
+                    Vector3 assignedEulers = PlayPlat.rotation.eulerAngles;
+                    assignedEulers.x = 0;
+                    assignedEulers.z = 0;
+                    PlayPlat.rotation = Quaternion.Euler(assignedEulers);
 
                     hasDoneIt = true;
                 }
@@ -147,16 +154,19 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
     {
         //Setup other teleporters
         foreach (GameObject Teleporter in GameObject.FindGameObjectsWithTag("Teleport"))
-        {
-            if (Teleporter != this.gameObject)
+        { 
+            if ((Teleporter.transform.parent) && (Teleporter.transform.parent.name != "ExtraContainer"))
             {
-                Teleporter.SetActive(false);
-            }
-            else
-            {
-                foreach (Renderer r in Teleporter.GetComponentsInChildren<Renderer>())
+                if (Teleporter != this.gameObject)
                 {
-                    r.enabled = false;
+                    Teleporter.SetActive(false);
+                }
+                else
+                {
+                    foreach (Renderer r in Teleporter.GetComponentsInChildren<Renderer>())
+                    {
+                        r.enabled = false; 
+                    }
                 }
             }
         }

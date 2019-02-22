@@ -19,7 +19,7 @@ public class UI_Image_Button : UI_Button
     {
         base.Start();
         canvasContainer = transform.GetChild(2).gameObject;
-        canvasContainer.transform.GetChild(0).GetComponent<Renderer>().material.SetTexture("_MainTex", canvasImage);
+//      canvasContainer.transform.GetChild(0).GetComponent<Renderer>().material.SetTexture("_MainTex", canvasImage);
         canvasScale = canvasContainer.transform.localScale;
         canvasContainer.transform.localScale = Vector3.zero;
         desiredCanvasScale = Vector3.zero;
