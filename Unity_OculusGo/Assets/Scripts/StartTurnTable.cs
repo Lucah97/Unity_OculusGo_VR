@@ -26,9 +26,13 @@ public class StartTurnTable : MonoBehaviour, IObjInteractionTarget {
     private float curDist;
     private float LerpVal = 0;
     private bool returning;
+    private int num = 0;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+
+        getObj();
+
         LerpDist = Vector3.Distance(Obj.position, Where.position);
         OrigObjPos = Obj.position;
         OrigObjRot = Obj.rotation;
@@ -84,11 +88,29 @@ public class StartTurnTable : MonoBehaviour, IObjInteractionTarget {
     {
         if (v == 0)
         {
+            getObj();
+            OrigObjPos = Obj.position;
+            OrigObjRot = Obj.rotation;
             startLerp();
         }
         else
         {
             reverseLerp();
+        }
+    }
+
+    private void getObj()
+    {
+        GameObject ObjInList = transform.GetChild(num).gameObject;
+        if (ObjInList.activeSelf && ObjInList.name != "HereButton" && ObjInList.name != "BackButton")
+        {
+            Obj = transform.GetChild(num);
+            num = 0;
+        }
+        else
+        {
+            num++;
+            getObj();
         }
     }
 

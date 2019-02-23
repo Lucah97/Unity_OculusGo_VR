@@ -7,8 +7,11 @@ public class ColorChanger : MonoBehaviour, IObjInteractionTarget
 {
     public DescriptionHandler DH;
 
-    public GameObject ColorThis;
-    public Material ObjMat;
+    private GameObject ColorThis;
+    private Material ObjMat;
+
+    public int ObjToColor;
+
     public Color CurCol;
 
     public Color color1;
@@ -27,6 +30,7 @@ public class ColorChanger : MonoBehaviour, IObjInteractionTarget
         else
         {
             Debug.Log("Well Unity suddenly has some chill");
+            SetObjColor();
         }
     }
 
@@ -36,9 +40,7 @@ public class ColorChanger : MonoBehaviour, IObjInteractionTarget
         {
             if(DH.curObj != null)
             {
-                ColorThis = DH.curObj.transform.GetChild(2).gameObject;
-                ObjMat = ColorThis.GetComponent<Renderer>().material;
-                CurCol = ObjMat.color;
+                SetObjColor();
                 UnityHasNoChill = false;
             }
         }
@@ -50,24 +52,42 @@ public class ColorChanger : MonoBehaviour, IObjInteractionTarget
         {
             case 1:
                 CurCol = color1;
-                ObjMat.color = CurCol;
+                SetObjColor();
                 break;
             case 2:
                 CurCol = color2;
-                ObjMat.color = CurCol;
+                SetObjColor();
                 break;
             case 3:
                 CurCol = color3;
-                ObjMat.color = CurCol;
+                SetObjColor();
                 break;
         }
     }
 
     public void SetObjColor()
     {
-        ColorThis = DH.curObj.transform.GetChild(0).gameObject;
-        ObjMat = ColorThis.GetComponent<Material>();
-        ObjMat.color = CurCol;
+        for (int i = 0; i < ObjToColor; i++)
+        {
+            ColorThis = DH.curObj.transform.GetChild(i).gameObject;
+            ObjMat = ColorThis.GetComponent<Renderer>().material;
+            ObjMat.color = CurCol;
+            //To get the rest of the Arm Colored
+            if(ColorThis.name == "lever2")
+            {
+                ColorThis = ColorThis.transform.GetChild(0).gameObject;
+                ObjMat = ColorThis.GetComponent<Renderer>().material;
+                ObjMat.color = CurCol;
+
+                //To get the Ladle Colored
+                if (ColorThis.name == "lever1")
+                {
+                    ColorThis = ColorThis.transform.GetChild(0).gameObject;
+                    ObjMat = ColorThis.GetComponent<Renderer>().material;
+                    ObjMat.color = CurCol;
+                }
+            }
+        }
     }
 
 }

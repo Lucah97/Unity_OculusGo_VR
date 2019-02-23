@@ -326,6 +326,7 @@
   <ItemGroup>
     <Compile Include="Assets\curObj.cs" />
     <Compile Include="Assets\DescriptionHandler.cs" />
+    <Compile Include="Assets\Essentials\ExtraHandler.cs" />
     <Compile Include="Assets\Essentials\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Essentials\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
     <Compile Include="Assets\Essentials\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
@@ -633,7 +634,6 @@
     <Compile Include="Assets\Essentials\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\Essentials\Standard Assets\Utility\WaypointProgressTracker.cs" />
     <Compile Include="Assets\ExtraConfig.cs" />
-    <Compile Include="Assets\ExtraHandler.cs" />
     <Compile Include="Assets\GoogleVR\Beta\Demos\Hello6DoFControllers\Scripts\DemoObjectController6DoF.cs" />
     <Compile Include="Assets\GoogleVR\Beta\Scripts\GvrBeta.cs" />
     <Compile Include="Assets\GoogleVR\Beta\Scripts\GvrBetaControllerVisualMulti.cs" />

@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class ExtraConfig : MonoBehaviour, IObjInteractionTarget {
 
+    [Header("Extras")]
     public ExtraItem[] extras = new ExtraItem[3];
 
+    [Header("Basic Properties")]
     public TextMesh title;
     public TextMesh description;
     public TextMesh price;
@@ -23,6 +25,12 @@ public class ExtraConfig : MonoBehaviour, IObjInteractionTarget {
 
     private int curExtra = 0;
 
+    //JUCY LERP
+    [Header("Jucy Lerp")]
+    private bool fancyLerp = false;
+    private Vector3 OrigPos;
+    public float LerpBy = 2;
+    public float LerpSpeed = 2;
 
 	void Start () {
         applyExtra();
@@ -50,10 +58,49 @@ public class ExtraConfig : MonoBehaviour, IObjInteractionTarget {
         curObj = extras[curExtra]._model;
         curPlat = extras[curExtra]._model;
 
+        jucyLerp();
+
         curObj.SetActive(true);
         curPlat.SetActive(true);
 
         givePrice();
+    }
+
+    private void jucyLerp()
+    {
+        OrigPos = curObj.transform.position;
+        Vector3 newPos = new Vector3(OrigPos.x, OrigPos.y + LerpBy, OrigPos.z);
+        curObj.transform.position = newPos;
+        fancyLerp = true;
+    }
+
+    private void Update()
+    {
+        if (fancyLerp)
+        {
+            if(Vector3.Distance(curObj.transform.position, OrigPos) > 0.02)
+            {
+                if (LerpSpeed > 0.25)
+                {
+                    LerpSpeed -= 0.001f;
+                }
+                curObj.transform.position = new Vector3(OrigPos.x, curObj.transform.position.y - Time.deltaTime * LerpSpeed, OrigPos.z);
+
+                //SafetyFix
+                if (curObj.transform.position.y <= OrigPos.y)
+                {
+                    curObj.transform.position = OrigPos;
+                    fancyLerp = false;
+                    LerpSpeed = 2;
+                }
+            }
+            else
+            {
+                curObj.transform.position = OrigPos;
+                fancyLerp = false;
+                LerpSpeed = 2;
+            }
+        }
     }
 
     void givePrice()
@@ -70,7 +117,10 @@ public class ExtraConfig : MonoBehaviour, IObjInteractionTarget {
 
     public void targetInteract(int v)
     {
-        incExtra(v);
+        if (!fancyLerp)
+        {
+            incExtra(v);
+        }
     }
 
     public void incExtra(int add)
