@@ -46,20 +46,24 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
     {
         //Setup Renderer
         TeleportRenderer.enabled = true;
-        TeleportRenderer.material.color = fadeColor;      
+        TeleportRenderer.material.color = fadeColor;
+
 
         //Start Fading
         stopAllTheFade();
         doTheFade = true;
-        
+
+
+
         //Delete all Amazon Echo Chat
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Echo"))
         {
+
             try
             {
                 g.GetComponent<EchoInteraction>().deleteChat();
             }
-            catch {}
+            catch { }
         }
     }
 
@@ -71,13 +75,19 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
             fadeDirection = false;
             elapsedTime = fadeInTime;
 
-            //bool hasDoneIt = false;
-            /*foreach (Camera c in Camera.allCameras)
+            //Actually Teleporting
+            //Vector3 dif = Teleportlocation.position - Player.position;
+            //Player.position = Teleportlocation.position;
+            //Player.rotation = Teleportlocation.rotation;
+
+            bool hasDoneIt = false;
+            foreach (Camera c in Camera.allCameras)
             {
                 if ((c.name == "LeftEyeAnchor") && (!hasDoneIt))
                 {
-                    c.transform.parent.position = Teleportlocation.position;
-                    c.transform.parent.rotation = Teleportlocation.rotation;
+                    Transform PlayPlat = GameObject.FindGameObjectWithTag("PlayerPlat").transform;
+                    Transform PlatFace = GameObject.FindGameObjectWithTag("PlatformFacing").transform;
+                    c.transform.parent.parent.parent.position = Teleportlocation.position;
 
                     PlayPlat.LookAt(PlatFace.position, Vector3.up);
                     Vector3 assignedEulers = PlayPlat.rotation.eulerAngles;
@@ -87,39 +97,33 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
 
                     hasDoneIt = true;
                 }
-            }*/
+            }
 
-            GameObject c = GameObject.FindGameObjectWithTag("Player").transform.parent.gameObject;
-            c.transform.position = Teleportlocation.position;
-            c.transform.rotation = Teleportlocation.rotation;
 
-            GameObject plat = GameObject.FindGameObjectWithTag("PlayerPlatform");
-            plat.transform.position = c.transform.position;
-            plat.transform.rotation = Quaternion.Euler(new Vector3(plat.transform.rotation.eulerAngles.x,
-                                                                   c.transform.rotation.eulerAngles.y,
-                                                                   plat.transform.rotation.eulerAngles.z));
+            //GameObject everything = GameObject.FindGameObjectWithTag("Finish");
+            //everything.transform.position = everything.transform.position - Teleportlocation.localPosition;
 
             removeTeles();
-            }
-
-            if ((elapsedTime < 0) && (!fadeDirection))
-            {
-
-                elapsedTime = 0;
-                TeleportRenderer.enabled = false;
-                doTheFade = false;
-                fadeDirection = true;
-            }
-
-            elapsedTime += (fadeDirection) ? Time.deltaTime : -Time.deltaTime;
-            float divTime = ((fadeDirection) ? fadeOutTime : fadeInTime); ;
-            float curAlpha = elapsedTime / divTime;
-
-            Color curColor = TeleportRenderer.material.color;
-            curColor.a = curAlpha;
-            TeleportRenderer.material.color = curColor;
-
         }
+
+        if ((elapsedTime < 0) && (!fadeDirection))
+        {
+
+            elapsedTime = 0;
+            TeleportRenderer.enabled = false;
+            doTheFade = false;
+            fadeDirection = true;
+        }
+
+        elapsedTime += (fadeDirection) ? Time.deltaTime : -Time.deltaTime;
+        float divTime = ((fadeDirection) ? fadeOutTime : fadeInTime); ;
+        float curAlpha = elapsedTime / divTime;
+
+        Color curColor = TeleportRenderer.material.color;
+        curColor.a = curAlpha;
+        TeleportRenderer.material.color = curColor;
+
+    }
 
     private void stopAllTheFade()
     {
@@ -143,29 +147,17 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
         //Setup other teleporters
         foreach (GameObject Teleporter in GameObject.FindGameObjectsWithTag("Teleport"))
         {
-            if (Teleporter.gameObject != this.gameObject)
+            if ((Teleporter.transform.parent) && (Teleporter.transform.parent.name != "ExtraContainer"))
             {
-                if (Teleporter.transform.parent.name != "SelectionContainer")
+                if (Teleporter != this.gameObject)
                 {
-                    foreach (Renderer ren in GetComponentsInChildren<Renderer>())
-                    {
-                        ren.enabled = true;
-                    }
-
                     Teleporter.SetActive(false);
-                }
-            }
-            else
-            { 
-                foreach (Renderer ren in GetComponentsInChildren<Renderer>())
-                {
-                    ren.enabled = false;
                 }
                 else
                 {
                     foreach (Renderer r in Teleporter.GetComponentsInChildren<Renderer>())
                     {
-                        r.enabled = false; 
+                        r.enabled = false;
                     }
                 }
             }
@@ -175,14 +167,7 @@ public class Teleport : MonoBehaviour, IObjInteractionTarget
         {
             foreach (GameObject Tele in Visible)
             {
-                if (Tele)
-                {
-                    Tele.SetActive(true);
-                    foreach (Renderer ren in GetComponentsInChildren<Renderer>())
-                    {
-                        ren.enabled = true;
-                    }
-                }
+                if (Tele) Tele.SetActive(true);
             }
         }
     }
